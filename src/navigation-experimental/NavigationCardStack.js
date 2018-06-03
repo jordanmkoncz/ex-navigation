@@ -45,6 +45,9 @@ const {
 } = require('react-native');
 const PropTypes = require('prop-types');
 
+// If ViewPropTypes is not defined fall back to View.propTypes (to support RN < 0.44).
+const ViewPropTypesCompat = ViewPropTypes || View.propTypes;
+
 const { NativeAnimatedModule } = NativeModules;
 const { Directions } = NavigationCardStackPanResponder;
 
@@ -205,12 +208,12 @@ class NavigationCardStack extends React.Component<DefaultProps, Props, void> {
     /**
      * Custom style applied to the cards stack.
      */
-    style: ViewPropTypes.style,
+    style: ViewPropTypesCompat.style,
 
     /**
      * Custom style applied to the scenes stack.
      */
-    scenesStyle: ViewPropTypes.style,
+    scenesStyle: ViewPropTypesCompat.style,
   };
 
   static defaultProps: DefaultProps = {

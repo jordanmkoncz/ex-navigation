@@ -49,6 +49,9 @@ const {
   ViewPropTypes,
 } = ReactNative;
 
+// If ViewPropTypes is not defined fall back to View.propTypes (to support RN < 0.44).
+const ViewPropTypesCompat = ViewPropTypes || View.propTypes;
+
 import type {
   NavigationSceneRendererProps,
   NavigationStyleInterpolator,
@@ -111,9 +114,9 @@ class NavigationHeader extends React.Component<DefaultProps, Props, any> {
     renderLeftComponent: PropTypes.func,
     renderRightComponent: PropTypes.func,
     renderTitleComponent: PropTypes.func,
-    style: ViewPropTypes.style,
+    style: ViewPropTypesCompat.style,
     statusBarHeight: PropTypes.number,
-    viewProps: PropTypes.shape(ViewPropTypes),
+    viewProps: PropTypes.shape(ViewPropTypesCompat),
   };
 
   shouldComponentUpdate(nextProps: Props, nextState: any): boolean {

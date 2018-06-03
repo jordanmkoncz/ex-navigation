@@ -37,6 +37,9 @@ const PropTypes = require('prop-types');
 
 const { Platform, StyleSheet, View, Text, ViewPropTypes } = ReactNative;
 
+// If ViewPropTypes is not defined fall back to View.propTypes (to support RN < 0.44).
+const ViewPropTypesCompat = ViewPropTypes || View.propTypes;
+
 type Props = {
   children?: React.Element<any>,
   style?: any,
@@ -74,7 +77,7 @@ const styles = StyleSheet.create({
 
 NavigationHeaderTitle.propTypes = {
   children: PropTypes.node.isRequired,
-  style: ViewPropTypes.style,
+  style: ViewPropTypesCompat.style,
   textStyle: Text.propTypes.style,
 };
 
