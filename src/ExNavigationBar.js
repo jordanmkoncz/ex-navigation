@@ -14,6 +14,9 @@ import PureComponent from './utils/PureComponent';
 import { unsupportedNativeView } from './ExUnsupportedNativeView';
 import { withNavigation } from './ExNavigationComponents';
 
+// If ViewPropTypes is not defined fall back to View.propTypes (to support RN < 0.44).
+const ViewPropTypesCompat = ViewPropTypes || View.propTypes;
+
 import isIPhoneX from './utils/isIPhoneX';
 
 let BlurView;
@@ -189,7 +192,7 @@ export default class ExNavigationBar extends PureComponent {
     renderBackgroundComponent: PropTypes.func,
     barHeight: PropTypes.number.isRequired,
     statusBarHeight: PropTypes.number.isRequired,
-    style: ViewPropTypes.style,
+    style: ViewPropTypesCompat.style,
   };
 
   constructor(props, context) {
