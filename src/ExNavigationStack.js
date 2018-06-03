@@ -24,6 +24,7 @@ import ExNavigationAlertBar from './ExNavigationAlertBar';
 import * as NavigationStyles from './ExNavigationStyles';
 import SharedElementGroup
   from './shared-element/ExNavigationSharedElementGroup';
+import isIPhoneX from './utils/isIPhoneX';
 
 const { Transitioner: NavigationTransitioner } = NavigationExperimental;
 
@@ -50,6 +51,8 @@ const DEFAULT_STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 25;
 const STATUSBAR_HEIGHT = Platform.OS === 'ios'
   ? DEFAULT_STATUSBAR_HEIGHT
   : global.__exponent ? DEFAULT_STATUSBAR_HEIGHT : 0;
+
+const IPHONE_X_EXTRA_HEIGHT = isIPhoneX ? 20 : 0;
 
 type TransitionFn = (
   transitionProps: NavigationTransitionProps,
@@ -543,7 +546,7 @@ class ExNavigationStack extends PureComponent<any, Props, State> {
       <View style={alertBarContainerStyle}>
         <AlertBarComponent
           style={
-            navigationBarIsVisible ? null : { paddingTop: STATUSBAR_HEIGHT }
+            navigationBarIsVisible ? null : { paddingTop: STATUSBAR_HEIGHT + IPHONE_X_EXTRA_HEIGHT }
           }
           getNavigatorContext={this._getNavigatorContext}
           navigatorUID={this.state.navigatorUID}
