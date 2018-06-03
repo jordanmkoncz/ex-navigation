@@ -35,7 +35,7 @@ type State = {
 };
 
 const ALERT_DISPLAY_TIME_MS = 6000;
-const ALERT_TEXT_VERTICAL_MARGIN = 12;
+const ALERT_TEXT_VERTICAL_MARGIN = 14;
 const ALERT_TEXT_HORIZONTAL_MARGIN = 8;
 
 @exNavConnect((data, props) => ExNavigationAlertBar.getDataProps(data, props))
