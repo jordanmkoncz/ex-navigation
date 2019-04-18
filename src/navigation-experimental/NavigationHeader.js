@@ -52,6 +52,7 @@ const {
 // If ViewPropTypes is not defined fall back to View.propTypes (to support RN < 0.44).
 const ViewPropTypesCompat = ViewPropTypes || View.propTypes;
 
+import { isNewIPadPro } from '../utils/safeAreaUtils';
 import type {
   NavigationSceneRendererProps,
   NavigationStyleInterpolator,
@@ -83,7 +84,16 @@ type Props = NavigationSceneRendererProps & {
 type SubViewName = 'left' | 'title' | 'right';
 
 const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
-const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
+
+let STATUSBAR_HEIGHT;
+
+if (isNewIPadPro) {
+  STATUSBAR_HEIGHT = 24;
+} else if (Platform.OS === 'ios') {
+  STATUSBAR_HEIGHT = 20;
+} else {
+  STATUSBAR_HEIGHT = 0;
+}
 
 class NavigationHeader extends React.Component<DefaultProps, Props, any> {
   props: Props;

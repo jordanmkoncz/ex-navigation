@@ -47,12 +47,21 @@ const DEFAULT_ROUTE_CONFIG: ExNavigationConfig = {
     : NavigationStyles.Fade,
 };
 
-const DEFAULT_STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 25;
+let DEFAULT_STATUSBAR_HEIGHT;
+
+if (isNewIPadPro) {
+  DEFAULT_STATUSBAR_HEIGHT = 24;
+} else if (Platform.OS === 'ios') {
+  DEFAULT_STATUSBAR_HEIGHT = 20;
+} else {
+  DEFAULT_STATUSBAR_HEIGHT = 25;
+}
+
 const STATUSBAR_HEIGHT = Platform.OS === 'ios'
   ? DEFAULT_STATUSBAR_HEIGHT
   : global.__exponent ? DEFAULT_STATUSBAR_HEIGHT : 0;
 
-const IPHONE_X_EXTRA_HEIGHT = isIPhoneX || isNewIPadPro ? 20 : 0;
+const IPHONE_X_EXTRA_HEIGHT = isIPhoneX ? 20 : 0;
 
 type TransitionFn = (
   transitionProps: NavigationTransitionProps,

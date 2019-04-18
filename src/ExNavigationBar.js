@@ -32,8 +32,17 @@ if (expoModule) {
 // Exponent draws under the status bar on Android, but vanilla React Native does not.
 // So we need to factor the status bar height in with Exponent but can ignore it with
 // vanilla React Native
-const STATUSBAR_HEIGHT =
-  Platform.OS === 'ios' ? 20 : global.__exponent ? 24 : 0;
+let STATUSBAR_HEIGHT;
+
+if (isNewIPadPro) {
+  STATUSBAR_HEIGHT = 24;
+} else if (Platform.OS === 'ios') {
+  STATUSBAR_HEIGHT = 20;
+} else if (global.__exponent) {
+  STATUSBAR_HEIGHT = 24;
+} else {
+  STATUSBAR_HEIGHT = 0;
+}
 
 const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 55;
 const BACKGROUND_COLOR = Platform.OS === 'ios' ? '#EFEFF2' : '#FFF';
@@ -42,7 +51,7 @@ const BORDER_BOTTOM_WIDTH =
   Platform.OS === 'ios' ? StyleSheet.hairlineWidth : 0;
 const BACK_BUTTON_HIT_SLOP = { top: 0, bottom: 0, left: 0, right: 30 };
 
-const IPHONE_X_EXTRA_HEIGHT = isIPhoneX || isNewIPadPro ? 20 : 0;
+const IPHONE_X_EXTRA_HEIGHT = isIPhoneX ? 20 : 0;
 
 class ExNavigationBarTitle extends PureComponent {
   render() {
