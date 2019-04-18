@@ -24,7 +24,7 @@ import ExNavigationAlertBar from './ExNavigationAlertBar';
 import * as NavigationStyles from './ExNavigationStyles';
 import SharedElementGroup
   from './shared-element/ExNavigationSharedElementGroup';
-import isIPhoneX from './utils/isIPhoneX';
+import { isIPhoneX, isNewIPadPro } from './utils/safeAreaUtils';
 
 const { Transitioner: NavigationTransitioner } = NavigationExperimental;
 
@@ -52,7 +52,7 @@ const STATUSBAR_HEIGHT = Platform.OS === 'ios'
   ? DEFAULT_STATUSBAR_HEIGHT
   : global.__exponent ? DEFAULT_STATUSBAR_HEIGHT : 0;
 
-const IPHONE_X_EXTRA_HEIGHT = isIPhoneX ? 20 : 0;
+const IPHONE_X_EXTRA_HEIGHT = isIPhoneX || isNewIPadPro ? 20 : 0;
 
 type TransitionFn = (
   transitionProps: NavigationTransitionProps,

@@ -17,12 +17,12 @@ import ExNavigatorContext from '../ExNavigatorContext';
 import ExNavigationTabBar from './ExNavigationTabBar';
 import ExNavigationTabItem from './ExNavigationTabItem';
 import { createNavigatorComponent } from '../ExNavigationComponents';
-import isIPhoneX from '../utils/isIPhoneX';
+import { isIPhoneX, isNewIPadPro } from '../utils/safeAreaUtils';
 
 import type ExNavigationContext from '../ExNavigationContext';
 
-const IPHONE_X_EXTRA_HEIGHT = isIPhoneX ? 38 : 0;
-const IPHONE_X_BOTTOM_OFFSET = isIPhoneX ? 28 : 0;
+const IPHONE_X_EXTRA_HEIGHT = isIPhoneX || isNewIPadPro ? 38 : 0;
+const IPHONE_X_BOTTOM_OFFSET = isIPhoneX || isNewIPadPro ? 28 : 0;
 
 export class ExNavigationTabContext extends ExNavigatorContext {
   type = 'tab';

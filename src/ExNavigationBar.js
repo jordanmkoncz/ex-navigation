@@ -17,7 +17,7 @@ import { withNavigation } from './ExNavigationComponents';
 // If ViewPropTypes is not defined fall back to View.propTypes (to support RN < 0.44).
 const ViewPropTypesCompat = ViewPropTypes || View.propTypes;
 
-import isIPhoneX from './utils/isIPhoneX';
+import { isIPhoneX, isNewIPadPro } from './utils/safeAreaUtils';
 
 let BlurView;
 let expoModule = global.__exponent || global.__expo;
@@ -42,8 +42,7 @@ const BORDER_BOTTOM_WIDTH =
   Platform.OS === 'ios' ? StyleSheet.hairlineWidth : 0;
 const BACK_BUTTON_HIT_SLOP = { top: 0, bottom: 0, left: 0, right: 30 };
 
-const IPHONE_X_EXTRA_HEIGHT = isIPhoneX ? 20 : 0;
-const IPHONE_X_TOP_OFFSET = isIPhoneX ? 30 : 0;
+const IPHONE_X_EXTRA_HEIGHT = isIPhoneX || isNewIPadPro ? 20 : 0;
 
 class ExNavigationBarTitle extends PureComponent {
   render() {
